@@ -18,6 +18,7 @@ public class FuelPriceResource {
     @Autowired
     private FuelService fuelService;
 
+    //http://localhost:8080/fuel-station-prices?postCode=2155
     @GetMapping(value = "fuel-station-prices")
     public List<FuelStationPriceDTO> getFuelStationPrices(@RequestParam String postCode){
         return fuelService.findPriceByLocation(postCode, FuelType.E10);

@@ -1,7 +1,7 @@
 package com.navanga.fuelmanager.service.api;
 
 import com.navanga.fuelmanager.domain.AccessToken;
-import com.navanga.fuelmanager.domain.AccessTokenRepository;
+import com.navanga.fuelmanager.repository.AccessTokenRepository;
 import com.navanga.fuelmanager.service.api.response.AccessTokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
