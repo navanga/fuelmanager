@@ -21,8 +21,9 @@ import java.util.List;
 public class FuelApiAuthorizationService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    public static final String RESOURCE_URL = "https://api.onegov.nsw.gov.au/oauth/client_credential/accesstoken?grant_type=client_credentials";
-    public static final String AUTH_HEADER = "Basic ekFlOExIN0FQd09vM2pPVDVPbjBoczc3U3FzMDBsVWs6TzdyV2tTUTNyZUZJb3hrNg==";
+
+    @Autowired
+    private FuelApiConfiguration apiConfig;
 
     @Autowired
     private AccessTokenRepository accessTokenRepository;
@@ -31,12 +32,12 @@ public class FuelApiAuthorizationService {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", AUTH_HEADER);
+        headers.add("Authorization", apiConfig.getAuthHeader());
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<AccessTokenResponse> response =
                 restTemplate.exchange(
-                        RESOURCE_URL,
+                        apiConfig.getAuthorizationUrl(),
                         HttpMethod.GET,
                         entity, AccessTokenResponse.class);
 

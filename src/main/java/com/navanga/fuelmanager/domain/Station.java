@@ -1,11 +1,9 @@
 package com.navanga.fuelmanager.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "station")
@@ -18,6 +16,9 @@ public class Station implements Serializable {
     private String brand;
     private String code;
     private String address;
+
+    @OneToMany(mappedBy = "station")
+    private List<FuelStationPrice> fuelStationPrices;
 
     @Override
     public boolean equals(Object o) {

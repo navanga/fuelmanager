@@ -59,7 +59,6 @@ public class FuelService {
         List<FuelStationPrice> stationPriceList = new ArrayList<>();
         for (StationPrice stationPrice : stationPrices) {
             FuelStationPrice fuelStationPrice = new FuelStationPrice();
-            fuelStationPrice.setStationCode(stationPrice.getStationcode());
             fuelStationPrice.setFuelType(stationPrice.getFueltype());
             fuelStationPrice.setPrice(new BigDecimal(stationPrice.getPrice()));
 
@@ -78,6 +77,12 @@ public class FuelService {
 
         saveStationPriceResult(priceResult);
 
+        List<FuelStationPriceDTO> fuelStationPriceDTOList = convertLocationPriceResponseToFuelStationPriceDTOS(priceResult);
+
+        return fuelStationPriceDTOList;
+    }
+
+    private List<FuelStationPriceDTO> convertLocationPriceResponseToFuelStationPriceDTOS(FuelLocationPricesResponse priceResult) {
         Arrays.stream(priceResult.getStations()).flatMap(s -> Arrays.stream(priceResult.getPrices())
                         .filter(p -> p.getStationcode().equals(s.getCode())))
                 .map(s -> new FuelStationPriceDTO());
@@ -96,8 +101,11 @@ public class FuelService {
                 }
             }
         }
-
         return fuelStationPriceDTOList;
     }
 
+    public List<FuelStationPriceDTO> findAllPrices() {
+        FuelLocationPricesResponse priceResult = fuelApiService.findAllPrices();
+        return convertLocationPriceResponseToFuelStationPriceDTOS(priceResult);
+    }
 }

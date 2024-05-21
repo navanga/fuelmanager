@@ -30,4 +30,10 @@ public interface FuelApiService {
      */
     Object findPriceByGeoLocation(String latitude, String longitude, String radius);
 
+    /**
+     * Returns all current fuel prices for all service stations.
+     * @return
+     */
+    FuelLocationPricesResponse findAllPrices();
+
 }

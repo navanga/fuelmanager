@@ -12,15 +12,13 @@ public class FuelStationPrice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String stationCode;
-
     private BigDecimal price;
 
     private LocalDateTime lastUpdated;
 
     private String fuelType;
 
-    @OneToOne
+    @ManyToOne
     private Station station ;
 
     public Long getId() {
@@ -29,14 +27,6 @@ public class FuelStationPrice {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getStationCode() {
-        return stationCode;
-    }
-
-    public void setStationCode(String stationCode) {
-        this.stationCode = stationCode;
     }
 
     public BigDecimal getPrice() {
